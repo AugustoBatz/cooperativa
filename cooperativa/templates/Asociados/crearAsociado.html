@@ -1,0 +1,39 @@
+{% extends 'Layout/Layout.html' %}
+{% load crispy_forms_tags %}
+{%block titulo%}
+Ingreso de Asociado
+{%endblock%}
+{% block content %}
+
+<form method="POST">
+
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-sm">
+            {{ form.nombre|as_crispy_field }}
+        </div>
+        <div class="col-sm">
+            {{ form.apellido|as_crispy_field }}
+        </div>
+        <div class="col-sm">
+            {{ form.direccion | as_crispy_field }}
+        </div>
+        <div class="col-sm">
+            {{ form.telefono | as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            {{ form.profesion|as_crispy_field }}
+        </div>
+        <div class="col-sm">
+            {{ form.trabajo|as_crispy_field }}
+        </div>
+        <div class="col-sm">
+            {{ form.estado_civil | as_crispy_field }}
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}

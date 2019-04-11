@@ -1,0 +1,92 @@
+{% extends 'Layout/Layout.html' %}
+{%block titulo%}
+Asociados
+{%endblock%}
+
+{% block content %}
+ {% csrf_token %}
+    <a href="{%url 'Asociados:CrearAsociado' %}" class="btn btn-primary">Nuevo Asociado</a>
+{% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled page-item"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active page-item"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-igmail.cotem"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled page-item"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Télefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Estado Civil</th>
+                <th scope="col">Profesión</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if object_list %}
+            {% for asociado in object_list %}
+            <tr>
+                <th>{{asociado.id}}</th>
+                <th>{{asociado.nombre}}</th>
+                <th>{{asociado.apellido}}</th>
+                <th>{{asociado.telefono}}</th>
+                <th>{{asociado.direccion}}</th>
+                <th>{{asociado.estado_civil}}</th>
+                <th>{{asociado.profesion}}</th>
+                <th>
+                    <a class="btn btn-primary" href="{%url 'Asociados:EditarAsociado' asociado.id%}">Editar</a>
+                </th>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1>No existe ningun Asociado</h1>
+            {% endif %}
+
+        </tbody>
+    </table>
+    {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled page-item"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active page-item"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled page-item"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}
+

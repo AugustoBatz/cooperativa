@@ -1,0 +1,22 @@
+{% extends 'Layout/Layout2.html' %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<style>.errorlist{color:red;} label{display:none}</style>
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+        <form action="" method="post">{% csrf_token %}
+          <h3 class="mb-4">Registro</h3>
+          {{form.as_p}}
+          <p><input type="submit" class="btn btn-primary btn-block" value="Confimar"></p>
+        </form>
+        <a href="{% url 'Asociados:AsociadosAsociados' %}" class="btn btn-primary btn-block">Regresar</a>
+
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
